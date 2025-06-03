@@ -35,12 +35,13 @@ rails s
 
 ## Todo
 
-- [ ] Indexes
-- [ ] Add GET recipes endpoint
-- [ ] Add GET ingrediants endpoint
-- [ ] Add GET ingrediant endpoint
+- [x] Indexes
+- [x] Add GET recipes endpoint
+- [x] Add GET recipe endpoint
+- [x] Add GET ingrediant endpoint
 - [ ] Set API_KEY so the API is accessed and authorised by one client
-- [ ] Configure cors
+- [x] Configure cors
 - [ ] Add Rate limiting
 - [ ] Finish recipes list in fe, display recipe in modal
+- [ ] Implement lazy loading of results
 - [ ] Host both apps
