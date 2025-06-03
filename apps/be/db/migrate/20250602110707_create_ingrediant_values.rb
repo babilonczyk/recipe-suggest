@@ -7,5 +7,8 @@ class CreateIngrediantValues < ActiveRecord::Migration[8.0]
       t.integer :recipe_id, null: false
       t.timestamps
     end
+
+    add_index :ingrediant_values, :ingrediant_id
+    add_index :ingrediant_values, :recipe_id
   end
 end

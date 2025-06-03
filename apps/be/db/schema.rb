@@ -27,18 +27,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_02_141430) do
   end
 
   create_table "ingrediant_values", force: :cascade do |t|
-    t.integer "value", null: false
+    t.float "value", null: false
     t.integer "ingrediant_id", null: false
     t.integer "recipe_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["ingrediant_id"], name: "index_ingrediant_values_on_ingrediant_id"
+    t.index ["recipe_id"], name: "index_ingrediant_values_on_recipe_id"
   end
 
   create_table "ingrediants", force: :cascade do |t|
     t.string "name", null: false
-    t.string "unit_id", null: false
+    t.integer "unit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["unit_id"], name: "index_ingrediants_on_unit_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -50,12 +53,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_02_141430) do
     t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_recipes_on_author_id"
+    t.index ["category_id"], name: "index_recipes_on_category_id"
   end
 
   create_table "units", force: :cascade do |t|
     t.string "name", null: false
     t.string "help_text", null: false
-    t.string "symbol", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

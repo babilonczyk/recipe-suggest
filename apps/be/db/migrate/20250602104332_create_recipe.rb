@@ -8,7 +8,11 @@ class CreateRecipe < ActiveRecord::Migration[8.0]
 
       t.integer :author_id, null: false
       t.integer :category_id, null: false
+
       t.timestamps
     end
+
+    add_index :recipes, :author_id
+    add_index :recipes, :category_id
   end
 end

@@ -6,5 +6,7 @@ class CreateIngrediants < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
+
+    add_index :ingrediants, :unit_id
   end
 end
