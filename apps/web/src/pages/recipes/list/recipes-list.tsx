@@ -1,34 +1,92 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MultiSelectDropdown from "./components/multi-select";
-import RecipesTable from "./components/recipes-table";
+import IngredientsTable from "./components/ingredients-table";
+import { IngredientData, UnitRange } from "./types";
+import { UNIT_RANGES as DEFAULT_UNIT_RANGES } from "./constants";
 
-import { IngredientData } from "./types";
-
-import { DEFAULT_INGREDIENTS_STATE, UNIT_RANGES } from "./constants";
+const API_URL = (import.meta as any).env.VITE_API_URL;
 
 const RecipesList = () => {
   const [step, setStep] = useState<1 | 2>(1);
-
+  const [ingredientsState, setIngredientsState] = useState<
+    Record<string, IngredientData>
+  >({});
+  const [unitRanges, setUnitRanges] =
+    useState<Record<string, UnitRange>>(DEFAULT_UNIT_RANGES);
   const [selectedOptions, setSelectedOptions] = useState<
     Record<string, IngredientData>
   >({});
 
+  const ingredientNames = Object.keys(ingredientsState);
+
+  const UNIT_NAME_MAP: Record<string, string> = {
+    teaspoon: "tsp",
+    tablespoon: "tbsp",
+    piece: "pcs",
+    cup: "cup/s",
+    slice: "slice/s",
+    gram: "g",
+    liter: "ml",
+    milliliter: "ml",
+    ounce: "oz",
+    package: "package",
+  };
+
+  // Handle ingredient selection
   const handleSelectionChange = (newKeys: string[]) => {
     setSelectedOptions((prev) => {
       const updated: Record<string, IngredientData> = {};
       newKeys.forEach((key) => {
-        updated[key] = prev[key] || DEFAULT_INGREDIENTS_STATE[key];
+        updated[key] = prev[key] || ingredientsState[key];
       });
       return updated;
     });
   };
+
+  // Fetch and transform ingredients on mount
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      const response = await fetch(`${API_URL}/ingrediants`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      const ingrediants = data.ingrediants;
+
+      const localIngrediantsState: Record<string, IngredientData> = {};
+
+      ingrediants.forEach((item: any) => {
+        const name = item.name;
+        const rawUnit = item.unit?.name?.toLowerCase();
+        const normalizedUnit = UNIT_NAME_MAP[rawUnit];
+
+        if (!name || !normalizedUnit || !DEFAULT_UNIT_RANGES[normalizedUnit])
+          return;
+
+        localIngrediantsState[name] = {
+          amount: 0,
+          unit: normalizedUnit,
+          unitNote:
+            item.unit?.help_text ||
+            DEFAULT_UNIT_RANGES[normalizedUnit].unitNote,
+        };
+      });
+
+      setIngredientsState(localIngrediantsState);
+    };
+
+    fetchIngredients();
+  }, []);
 
   return (
     <div className="flex flex-col items-center gap-5 justify-center max-w-3xl mx-auto p-4">
       {step === 1 && (
         <>
           <div
-            className="tooltip tooltip-bottom  ml-auto"
+            className="tooltip tooltip-bottom ml-auto"
             data-tip={
               Object.entries(selectedOptions).length === 0
                 ? "Select at least one ingredient to proceed"
@@ -46,7 +104,7 @@ const RecipesList = () => {
 
           <MultiSelectDropdown
             formFieldName="ingredients"
-            options={Object.keys(DEFAULT_INGREDIENTS_STATE)}
+            options={ingredientNames}
             selectedOptions={Object.keys(selectedOptions)}
             setSelectedOptions={handleSelectionChange}
             onChange={() => {}}
@@ -54,9 +112,9 @@ const RecipesList = () => {
           />
 
           {Object.keys(selectedOptions).length > 0 && (
-            <RecipesTable
+            <IngredientsTable
               selectedOptions={selectedOptions}
-              unitRanges={UNIT_RANGES}
+              unitRanges={unitRanges}
               setSelectedOptions={setSelectedOptions}
             />
           )}

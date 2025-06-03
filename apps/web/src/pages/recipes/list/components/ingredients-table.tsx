@@ -8,7 +8,7 @@ type IngredientData = {
 
 type IngredientMap = Record<string, IngredientData>;
 
-interface RecipesTableProps {
+interface IngredientsTableProps {
   selectedOptions: IngredientMap;
   unitRanges: Record<string, any>;
   setSelectedOptions: (
@@ -16,11 +16,11 @@ interface RecipesTableProps {
   ) => void;
 }
 
-export default function RecipesTable({
+export default function IngredientsTable({
   selectedOptions,
   unitRanges,
   setSelectedOptions,
-}: RecipesTableProps) {
+}: IngredientsTableProps) {
   return (
     <table className="table ml-8 mt-3">
       <thead>

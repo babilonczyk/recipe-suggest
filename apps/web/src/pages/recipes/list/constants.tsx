@@ -1,4 +1,4 @@
-import { IngredientData, UnitRange } from "./types";
+import { UnitRange } from "./types";
 
 export const UNIT_RANGES: Record<string, UnitRange> = {
   ml: {
@@ -43,20 +43,32 @@ export const UNIT_RANGES: Record<string, UnitRange> = {
     rangeMarkers: ["0", "2", "4", "6", "8", "10"],
     unitNote: "bread slices",
   },
-};
-
-// Ingredient defaults stub - will come drom backend in real app
-export const DEFAULT_INGREDIENTS_STATE: Record<string, IngredientData> = {
-  Tea: { amount: 0, unit: "cup/s", unitNote: "1 cup = 150ml" },
-  Coffee: { amount: 0, unit: "cup/s", unitNote: "1 cup = 150ml" },
-  Milk: { amount: 0, unit: "cup/s", unitNote: "1 cup = 150ml" },
-  Sugar: { amount: 0, unit: "tsp", unitNote: "teaspoons" },
-  Salt: { amount: 0, unit: "tsp" },
-  Pepper: { amount: 0, unit: "tsp" },
-  Butter: { amount: 0, unit: "g", unitNote: "grams" },
-  Cheese: { amount: 0, unit: "g" },
-  Bread: { amount: 0, unit: "slice/s" },
-  Eggs: { amount: 0, unit: "pcs", unitNote: "pieces" },
-  Chicken: { amount: 0, unit: "g", unitNote: "grams" },
-  Fish: { amount: 0, unit: "g", unitNote: "grams" },
+  oz: {
+    rangeMin: 0,
+    rangeMax: 16,
+    rangeStep: 1,
+    rangeMarkers: ["0", "4", "8", "12", "16"],
+    unitNote: "1 oz ≈ 28.35 g",
+  },
+  tbsp: {
+    rangeMin: 0,
+    rangeMax: 10,
+    rangeStep: 1,
+    rangeMarkers: ["0", "2", "4", "6", "8", "10"],
+    unitNote: "1 tbsp ≈ 15 ml",
+  },
+  package: {
+    rangeMin: 0,
+    rangeMax: 5,
+    rangeStep: 1,
+    rangeMarkers: ["0", "1", "2", "3", "4", "5"],
+    unitNote: "package",
+  },
+  liter: {
+    rangeMin: 0,
+    rangeMax: 3,
+    rangeStep: 0.5,
+    rangeMarkers: ["0", "0.5", "1", "1.5", "2", "2.5", "3"],
+    unitNote: "1 liter = 1000 ml",
+  },
 };

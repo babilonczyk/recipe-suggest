@@ -118,7 +118,7 @@ export default function MultiSelectDropdown({
             />
 
             {/* Options */}
-            <ul ref={optionsListRef} className="grid grid-cols-3 gap-2">
+            <ul ref={optionsListRef} className="grid grid-cols-2 gap-2">
               {filteredOptions.map((option) => (
                 <li key={option}>
                   <label className="flex items-center rounded-md whitespace-nowrap cursor-pointer px-2 py-1 transition-colors hover:bg-blue-100 [&:has(input:checked)]:bg-blue-200">
