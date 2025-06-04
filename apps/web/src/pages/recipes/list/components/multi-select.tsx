@@ -8,6 +8,7 @@ interface MultiSelectDropdownProps {
   setSelectedOptions: (opts: string[]) => void;
   onChange: (selectedOptions: string[]) => void;
   prompt?: string;
+  loading: boolean;
 }
 
 export default function MultiSelectDropdown({
@@ -17,10 +18,12 @@ export default function MultiSelectDropdown({
   setSelectedOptions,
   onChange,
   prompt = "Select one or more options",
+  loading,
 }: MultiSelectDropdownProps) {
   const [isJsEnabled, setIsJsEnabled] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => setIsJsEnabled(true), []);
@@ -107,18 +110,25 @@ export default function MultiSelectDropdown({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder={
-                "Search for one of " + options.length + " ingrediants..."
+                loading
+                  ? "Loading..."
+                  : "Search for one of " + options.length + " ingrediants..."
               }
               className="w-full mb-2 px-2 py-1 border rounded-md border-gray-300"
             />
-            <List
-              height={185}
-              itemCount={filteredOptions.length}
-              itemSize={40}
-              width="100%"
-            >
-              {Row}
-            </List>
+
+            {loading ? (
+              <div className="text-center text-gray-500">Loading...</div>
+            ) : (
+              <List
+                height={185}
+                itemCount={filteredOptions.length}
+                itemSize={40}
+                width="100%"
+              >
+                {Row}
+              </List>
+            )}
           </div>
         )}
 

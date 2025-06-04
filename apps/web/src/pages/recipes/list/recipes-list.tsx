@@ -9,6 +9,7 @@ const API_URL = (import.meta as any).env.VITE_API_URL;
 
 const RecipesList = () => {
   const [step, setStep] = useState<1 | 2>(1);
+  const [loading, setLoading] = useState<boolean>(false);
   const [ingredientsState, setIngredientsState] = useState<
     Record<string, IngredientData>
   >({});
@@ -46,6 +47,8 @@ const RecipesList = () => {
 
   // Fetch and transform ingredients on mount
   useEffect(() => {
+    setLoading(true);
+
     const fetchIngredients = async () => {
       const response = await fetch(`${API_URL}/ingrediants`, {
         method: "GET",
@@ -78,6 +81,8 @@ const RecipesList = () => {
       });
 
       setIngredientsState(localIngrediantsState);
+
+      setLoading(false);
     };
 
     fetchIngredients();
@@ -111,6 +116,7 @@ const RecipesList = () => {
             setSelectedOptions={handleSelectionChange}
             onChange={() => {}}
             prompt="What ingredients do you own?"
+            loading={loading}
           />
 
           {Object.keys(selectedOptions).length > 0 && (
