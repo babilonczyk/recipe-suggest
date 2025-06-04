@@ -80,5 +80,5 @@ test:
 production:
   primary:
     <<: *default
-    url: <%= ENV.fetch('DATABASE_URL') %>
+    url: <%= ENV['DATABASE_URL'] || "" %>
     pool: <%= ENV["DB_POOL"] || 10 %>
