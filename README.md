@@ -1,5 +1,17 @@
 ## recipe-suggest
 
+api -> https://recipe-suggest-4ef83f6f8450.herokuapp.com/
+web -> https://recipe-suggest-web-lac.vercel.app/
+
+## Before running
+
+```
+cd apps/be
+rails db::create
+rails db:migrate
+rails db::seed
+```
+
 ## How to run?
 
 Before install dependencies
@@ -33,15 +45,22 @@ rails s
 
 3. As a user, I want to understand what quantities are expected in recipes, so I can check if I have enough of each ingredient.
 
-## Todo
+## Left to do / ideas
 
-- [x] Indexes
-- [x] Add GET recipes endpoint
-- [x] Add GET recipe endpoint
-- [x] Add GET ingrediant endpoint
-- [ ] Set API_KEY so the API is accessed and authorised by one client
-- [x] Configure cors
-- [ ] Add Rate limiting
-- [x] Finish recipes list in fe, display recipe in modal
-- [x] Implement lazy loading of results // solved pon the client side by adding window-react
-- [ ] Host both apps
+Stuff I made as a cut scope, because I didn't have enough time:
+
+- rate limiting
+- display information on found_recipe page on how many ingrediants user has and how many he needs to buy
+- allow passing image of the items and send request to the openai to find what ingrediants user has. Than search recipes based on that output
+
+## Interesting cases/observations
+
+- I was thinking on implementing infinite scrolling on the be, to don't end up with memory problem on the clint side when displaying all ingrediants/recipes. But I found the 'window-react' lib which solves the issue on the clinet side
+
+- I've spend some time debugging cors issue. For some reason clinet could make some request, but other were being blocked. Turnes out I have passed / at the end of https://recipe-suggest-web-lac.vercel.app in cors.rb initializer which was creating some formating issue
+
+- I've had select all ingrediants working on the local environment, but when dealing with thousands of records I've been reaching the limit of how long request can be when passing ?imgrediant_ids=... filter. So I've removed it.
+
+## Vision
+
+Simplicity. My goal was to create a simple tool for finding recipes.
