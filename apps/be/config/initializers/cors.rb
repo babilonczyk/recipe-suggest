@@ -5,15 +5,15 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
-Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  allow do
-    origins = [ "http://localhost:5000" ]
-    origins << ENV["FRONTEND_ORIGIN"] if ENV["FRONTEND_ORIGIN"].present?
+# Rails.application.config.middleware.insert_before 0, Rack::Cors do
+#   allow do
+#     origins = [ "http://localhost:5000" ]
+#     origins << ENV["FRONTEND_ORIGIN"] if ENV["FRONTEND_ORIGIN"].present?
 
-    origins origins
+#     origins origins
 
-    resource "/api/*",
-      headers: :any,
-      methods: [ :get, :post, :patch, :put, :delete, :options ]
-  end
-end
+#     resource "/api/*",
+#       headers: :any,
+#       methods: [ :get, :post, :patch, :put, :delete, :options ]
+#   end
+# end
