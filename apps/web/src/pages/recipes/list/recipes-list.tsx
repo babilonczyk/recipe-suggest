@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MultiSelectDropdown from "./components/multi-select";
 import IngredientsTable from "./components/ingredients-table";
+import FoundRecipes from "./components/found-recipes";
 import { IngredientData, UnitRange } from "./types";
 import { UNIT_RANGES as DEFAULT_UNIT_RANGES } from "./constants";
 
@@ -67,6 +68,7 @@ const RecipesList = () => {
           return;
 
         localIngrediantsState[name] = {
+          ingredientId: item.id,
           amount: 0,
           unit: normalizedUnit,
           unitNote:
@@ -133,7 +135,8 @@ const RecipesList = () => {
           <h1 className="text-xl font-semibold text-center">
             Recipes based on your ingredients
           </h1>
-          <pre>{JSON.stringify(selectedOptions, null, 2)}</pre>
+
+          <FoundRecipes selectedIngredients={selectedOptions} />
         </>
       )}
     </div>
