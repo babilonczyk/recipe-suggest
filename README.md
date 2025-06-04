@@ -42,6 +42,6 @@ rails s
 - [ ] Set API_KEY so the API is accessed and authorised by one client
 - [x] Configure cors
 - [ ] Add Rate limiting
-- [ ] Finish recipes list in fe, display recipe in modal
-- [ ] Implement lazy loading of results
+- [x] Finish recipes list in fe, display recipe in modal
+- [x] Implement lazy loading of results // solved pon the client side by adding window-react
 - [ ] Host both apps

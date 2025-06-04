@@ -2,6 +2,7 @@
   "name": "recipe-suggest",
   "version": "1.0.0",
   "main": "index.js",
+  "packageManager": "yarn@1.22.22",
   "repository": "git@github.com:babilonczyk/recipe-suggest.git",
   "author": "Jan Piotrzkowski <piotrzkowski.jan@gmail.com>",
   "license": "MIT",
