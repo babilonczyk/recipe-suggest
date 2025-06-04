@@ -7,9 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins = [ "http://localhost:5000", "https://recipe-suggest-web-lac.vercel.app/" ]
-
-    origins origins
+    origins "http://localhost:5000", "https://recipe-suggest-web-lac.vercel.app"
 
     resource "/api/*",
       headers: :any,
