@@ -55,9 +55,9 @@ Stuff I made as a cut scope, because I didn't have enough time:
 
 ## Interesting cases/observations
 
-- I was thinking on implementing infinite scrolling on the be, to don't end up with memory problem on the clint side when displaying all ingrediants/recipes. But I found the 'window-react' lib which solves the issue on the clinet side
+- I was thinking on implementing infinite scrolling on the be, to don't end up with memory problem on the client side when displaying all ingrediants/recipes. But I found the 'window-react' lib which solves the issue on the client side
 
-- I've spend some time debugging cors issue. For some reason clinet could make some request, but other were being blocked. Turnes out I have passed / at the end of https://recipe-suggest-web-lac.vercel.app in cors.rb initializer which was creating some formating issue
+- I've spend some time debugging cors issue. For some reason client could make some request, but other were being blocked. Turnes out I have passed / at the end of https://recipe-suggest-web-lac.vercel.app in cors.rb initializer which was creating some formating issue
 
 - I've had select all ingrediants working on the local environment, but when dealing with thousands of records I've been reaching the limit of how long request can be when passing ?imgrediant_ids=... filter. So I've removed it.
 
