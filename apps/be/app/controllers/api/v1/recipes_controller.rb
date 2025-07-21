@@ -8,7 +8,7 @@ module Api
         if params[:ingrediant_ids].present?
           ingrediant_ids = params[:ingrediant_ids]&.split(",")&.map(&:to_i)
 
-          recipes = Recipe
+          recipes = recipes
             .joins(:ingrediant_values)
             .where(ingrediant_values: { ingrediant_id: ingrediant_ids })
             .select("recipes.*")
